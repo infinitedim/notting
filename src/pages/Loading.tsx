@@ -1,7 +1,10 @@
 export default function Loading(): JSX.Element {
   return (
-    <div>
-      <h1>Loading...</h1>
+    <div className="meetup">
+      <div />
+      <div />
+      <div />
+      <div />
     </div>
   );
 }
