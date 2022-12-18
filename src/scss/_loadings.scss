@@ -27,8 +27,8 @@
 .meetup {
   -webkit-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
 
   div {
     height: 100%;
@@ -36,7 +36,7 @@
     width: 100%;
     -webkit-animation: meetup 1.25s infinite ease;
     animation: meetup 1.25s infinite ease;
-    background: var(--primary);
+    background: #0284c7;
     border-radius: 100%;
 
     &:nth-child(1) {

@@ -1,10 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-const Home = lazy(async () => await import("./pages/Home"));
-const NewNote = lazy(async () => await import("./pages/NewNote"));
 const EditNote = lazy(async () => await import("./pages/EditNote"));
+const Home = lazy(async () => await import("./pages/Home"));
 const Loading = lazy(async () => await import("./pages/Loading"));
+const NewNote = lazy(async () => await import("./pages/NewNote"));
+const ShowNote = lazy(async () => await import("./pages/ShowNote"));
 
 export default function App(): JSX.Element {
   return (
@@ -21,10 +22,10 @@ export default function App(): JSX.Element {
         <Route path="/:id">
           <Route
             index
-            element={<NewNote />}
+            element={<ShowNote />}
           />
           <Route
-            path="/edit"
+            path="edit"
             element={<EditNote />}
           />
         </Route>

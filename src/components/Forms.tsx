@@ -1,4 +1,4 @@
-export default function Form(): JSX.Element {
+export default function Forms(): JSX.Element {
   return (
     <div>
       <h1>Form</h1>
