@@ -29,8 +29,8 @@
 .meetup {
   -webkit-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
 }
 
 .meetup div {

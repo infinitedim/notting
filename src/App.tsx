@@ -1,6 +1,8 @@
-import { lazy, Suspense, useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { RawNote, Tag } from "./types/types";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 const EditNote = lazy(async () => await import("./pages/EditNote"));
 const Home = lazy(async () => await import("./pages/Home"));
@@ -10,11 +12,9 @@ const ShowNote = lazy(async () => await import("./pages/ShowNote"));
 // const Navbars = lazy(async () => await import("./components/Navbar"));
 
 export default function App(): JSX.Element {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location]);
+  // const location = useLocation();
+  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
+  const [tags, setTags] = useLocalStorage<Tag[]>("NOTES", []);
 
   return (
     <Suspense fallback={<Loading />}>

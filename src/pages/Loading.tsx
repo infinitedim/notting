@@ -1,4 +1,4 @@
-import "../styles/loadings.css";
+import "../assets/styles/loadings.css";
 
 export default function Loading(): JSX.Element {
   return (

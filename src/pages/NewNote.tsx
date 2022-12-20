@@ -2,9 +2,9 @@ import NoteForms from "../components/NoteForms";
 
 export default function NewNote(): JSX.Element {
   return (
-    <div>
-      <h1>NewNote</h1>
+    <>
+      <h1>New Note</h1>
       <NoteForms />
-    </div>
+    </>
   );
 }
