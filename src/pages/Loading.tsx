@@ -1,6 +1,8 @@
+import "../styles/loadings.css";
+
 export default function Loading(): JSX.Element {
   return (
-    <div className="wrapper m-auto flex h-screen items-center justify-center overflow-hidden">
+    <div className="wrapper d-flex justify-content-center align-items-center overflow-hidden">
       <div className="meetup">
         <div />
         <div />

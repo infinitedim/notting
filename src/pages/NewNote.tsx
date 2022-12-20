@@ -1,10 +1,10 @@
-import Forms from "../components/Forms";
+import NoteForms from "../components/NoteForms";
 
 export default function NewNote(): JSX.Element {
   return (
     <div>
       <h1>NewNote</h1>
-      <Forms />
+      <NoteForms />
     </div>
   );
 }
