@@ -7,14 +7,14 @@ export interface RawNote {
 }
 
 export interface RawNoteData {
-  title: string | undefined;
-  markdown: string | undefined;
+  title: string;
+  markdown: string;
   tagIds: string;
 }
 
 export interface NoteData {
-  title: string | undefined;
-  markdown: string | undefined;
+  title: string;
+  markdown: string;
   tags: Tag[];
 }
 

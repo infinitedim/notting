@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormEvent, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Col from "react-bootstrap/esm/Col";
@@ -16,8 +17,8 @@ export default function NoteForms({ onSubmit }: NoteFormProps): JSX.Element {
     event.preventDefault();
 
     onSubmit({
-      title: titleRef.current?.value,
-      markdown: markdownRef.current?.value,
+      title: titleRef.current!.value,
+      markdown: markdownRef.current!.value,
       tags: [],
     });
   }
