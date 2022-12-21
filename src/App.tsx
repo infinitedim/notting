@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { lazy, Suspense, useMemo } from "react";
+import { lazy, SetStateAction, Suspense, useMemo } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { v4 as uuidV4 } from "uuid";
 import { NoteData, RawNote, Tag } from "./types/types";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { v4 as uuidV4 } from "uuid";
 
 const EditNote = lazy(async () => await import("./pages/EditNote"));
 const Home = lazy(async () => await import("./pages/Home"));
@@ -30,8 +31,7 @@ export default function App(): JSX.Element {
   }, [notes, tags]);
 
   function onCreateNote({ tags, ...data }: NoteData) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setNotes((prevNotes: any) => {
+    setNotes((prevNotes: RawNote[] | SetStateAction<RawNote[]>) => {
       return [
         ...prevNotes,
         {
