@@ -1,26 +1,57 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { lazy, Suspense, useMemo } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { RawNote, Tag } from "./types/types";
-import useLocalStorage from "./hooks/useLocalStorage";
+import { NoteData, RawNote, Tag } from "./types/types";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import { v4 as uuidV4 } from "uuid";
 
 const EditNote = lazy(async () => await import("./pages/EditNote"));
 const Home = lazy(async () => await import("./pages/Home"));
 const Loading = lazy(async () => await import("./pages/Loading"));
 const NewNote = lazy(async () => await import("./pages/NewNote"));
 const ShowNote = lazy(async () => await import("./pages/ShowNote"));
-// const Navbars = lazy(async () => await import("./components/Navbar"));
+const Navbars = lazy(async () => await import("./components/Navbar"));
 
 export default function App(): JSX.Element {
-  // const location = useLocation();
+  const location = useLocation();
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
-  const [tags, setTags] = useLocalStorage<Tag[]>("NOTES", []);
+  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+
+  const noteWithTags = useMemo(() => {
+    return notes.map((note) => {
+      return {
+        ...note,
+        tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
+      };
+    });
+  }, [notes, tags]);
+
+  function onCreateNote({ tags, ...data }: NoteData) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setNotes((prevNotes: any) => {
+      return [
+        ...prevNotes,
+        {
+          ...data,
+          id: uuidV4(),
+          tagIds: tags.map((tag) => tag.id),
+        },
+      ];
+    });
+  }
+
+  function addTag(tags: Tag) {
+    setTags((prevTags) => [...prevTags, tags]);
+  }
 
   return (
     <Suspense fallback={<Loading />}>
-      {/* {location.pathname !== "/login" && location.pathname !== "/register" && (
+      {location.pathname !== "/login" && location.pathname !== "/register" && (
         <Navbars />
-      )} */}
+      )}
       <Container className="my-4">
         <Routes>
           <Route
@@ -29,7 +60,13 @@ export default function App(): JSX.Element {
           />
           <Route
             path="/new"
-            element={<NewNote />}
+            element={
+              <NewNote
+                onSubmit={onCreateNote}
+                onAddTag={addTag}
+                availableTags={tags}
+              />
+            }
           />
           <Route path="/:id">
             <Route
