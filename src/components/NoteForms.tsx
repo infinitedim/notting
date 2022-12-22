@@ -53,10 +53,10 @@ export default function NoteForms({
                     newTags,
                   ]);
                 }}
-                value={selectedTags.map((tag) => {
+                value={selectedTags?.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}
-                options={availableTags.map((tag) => {
+                options={availableTags?.map((tag) => {
                   return { label: tag.label, value: tag.id };
                 })}
                 onChange={(tags) =>
@@ -77,6 +77,7 @@ export default function NoteForms({
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
           <Form.Control
+            // defaultValue={markdown}
             required
             as="textarea"
             rows={15}

@@ -13,10 +13,7 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ]
+      "extends": ["plugin:@typescript-eslint/recommended"]
     }
   ],
   "parserOptions": {
@@ -25,13 +22,14 @@
     "project": "./tsconfig.json"
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "prettier", "@typescript-eslint", "n", "promise"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "@typescript-eslint/quotes": ["error", "double"],
     "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "prettier/prettier": [
       "error",
       {

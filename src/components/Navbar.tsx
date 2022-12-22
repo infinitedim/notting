@@ -6,20 +6,29 @@ import { Link } from "react-router-dom";
 export default function Navbars(): JSX.Element {
   return (
     <Navbar
-      bg="light"
+      bg="transparent"
       variant="light"
     >
       <Container>
         <Navbar.Brand href="#home">Notting</Navbar.Brand>
         <Nav className="d-flex justify-content-end">
-          <Nav.Link className="text-decoration-none">
-            <Link to="/">Home</Link>
+          <Nav.Link
+            as={Link}
+            to="/"
+          >
+            Home
           </Nav.Link>
-          <Nav.Link className="text-decoration-none">
-            <Link to="/new">Create Notes</Link>
+          <Nav.Link
+            as={Link}
+            to="/new"
+          >
+            Create Notes
           </Nav.Link>
-          <Nav.Link className="text-decoration-none">
-            <Link to="/archive">Archive Notes</Link>
+          <Nav.Link
+            as={Link}
+            to="/archive"
+          >
+            Archive Notes
           </Nav.Link>
         </Nav>
       </Container>

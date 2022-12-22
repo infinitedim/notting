@@ -1196,7 +1196,7 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@jridgewell/sourcemap-codec@1.4.14", "@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.13":
+"@jridgewell/sourcemap-codec@1.4.14", "@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.13", "@jridgewell/sourcemap-codec@^1.4.14":
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.14.tgz#add4c98d341472a289190b424efbdb096991bb24"
   integrity sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==
@@ -1304,6 +1304,15 @@
   dependencies:
     "@rollup/pluginutils" "^5.0.1"
     magic-string "^0.27.0"
+
+"@rollup/plugin-terser@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-terser/-/plugin-terser-0.2.1.tgz#dcf0b163216dafb64611b170a7667e76a7f03d2b"
+  integrity sha512-hV52c8Oo6/cXZZxVVoRNBb4zh+EKSHS4I1sedWV5pf0O+hTLSkrf6w86/V0AZutYtwBguB6HLKwz89WDBfwGOA==
+  dependencies:
+    serialize-javascript "^6.0.0"
+    smob "^0.0.6"
+    terser "^5.15.1"
 
 "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
@@ -3523,6 +3532,13 @@ serialize-javascript@^4.0.0:
   dependencies:
     randombytes "^2.1.0"
 
+serialize-javascript@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-6.0.0.tgz#efae5d88f45d7924141da8b5c3a7a7e663fefeb8"
+  integrity sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==
+  dependencies:
+    randombytes "^2.1.0"
+
 shebang-command@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-2.0.0.tgz#ccd0af4f8835fbdc265b82461aaf0c36663f34ea"
@@ -3548,6 +3564,11 @@ slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
+
+smob@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/smob/-/smob-0.0.6.tgz#09b268fea916158a2781c152044c6155adbb8aa1"
+  integrity sha512-V21+XeNni+tTyiST1MHsa84AQhT1aFZipzPpOFAVB8DkHzwJyjjAmt9bgwnuZiZWnIbMo2duE29wybxv/7HWUw==
 
 source-map-js@^1.0.2:
   version "1.0.2"
@@ -3686,7 +3707,7 @@ tempy@^0.6.0:
     type-fest "^0.16.0"
     unique-string "^2.0.0"
 
-terser@^5.0.0:
+terser@^5.0.0, terser@^5.15.1:
   version "5.16.1"
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.16.1.tgz#5af3bc3d0f24241c7fb2024199d5c461a1075880"
   integrity sha512-xvQfyfA1ayT0qdK47zskQgRZeWLoOQ8JQ6mIgRGVNwZKdQMU+5FkCBjmv4QjcrTzyZquRw2FVtlJSRUmMKQslw==

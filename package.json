@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@jridgewell/sourcemap-codec": "^1.4.14",
+    "@rollup/plugin-terser": "^0.2.1",
     "@types/bootstrap": "^5.2.6",
     "@types/node": "^18.11.17",
     "@types/react": "^18.0.26",
