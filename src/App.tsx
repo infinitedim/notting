@@ -107,10 +107,13 @@ export default function App(): JSX.Element {
               />
             }
           />
-          <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
+          <Route
+            path="/:id"
+            element={<NoteLayout notes={notesWithTags} />}
+          >
             <Route
               index
-              element={<Note onDelete={onDeleteNote} />}}
+              element={<Note onDelete={onDeleteNote} />}
             />
             <Route
               path="edit"

@@ -10,6 +10,9 @@ import { v4 as uuidV4 } from "uuid";
 import { Tag, NoteFormProps } from "../types/types";
 
 export default function NoteForms({
+  title,
+  markdown,
+  tags,
   onSubmit,
   onAddTag,
   availableTags,

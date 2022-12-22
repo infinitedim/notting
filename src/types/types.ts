@@ -56,6 +56,16 @@ export type NoteListProps = {
   onUpdateTag: (id: string, label: string) => void;
 };
 
+export type NoteProps = {
+  onDelete: (id: string) => void;
+};
+
 export type NoteLayoutProps = {
   notes: Note[];
+};
+
+export type EditNoteProps = {
+  onSubmit: (id: string, data: NoteData) => void;
+  onAddTag: (tag: Tag) => void;
+  availableTags: Tag[];
 };
