@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import ReactSelect from "react-select";
 import EditTagsModal from "../components/EditTagsModal";
 import NoteCard from "../components/NoteCard";
@@ -40,12 +39,9 @@ export default function NoteList({
             gap={2}
             direction="horizontal"
           >
-            <Link to="/new">
-              <Button variant="primary">Create</Button>
-            </Link>
             <Button
               onClick={() => setEditTagsModalIsOpen(true)}
-              variant="outline-secondary"
+              variant="outline-primary"
             >
               Edit Tags
             </Button>

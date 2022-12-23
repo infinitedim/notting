@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -16,19 +17,13 @@ export default function Navbars(): JSX.Element {
             as={Link}
             to="/"
           >
-            Home
+            <Button variant="outline-danger">Logout</Button>
           </Nav.Link>
           <Nav.Link
             as={Link}
-            to="/new"
+            to="/archived"
           >
-            Create Notes
-          </Nav.Link>
-          <Nav.Link
-            as={Link}
-            to="/archive"
-          >
-            Archive Notes
+            <Button variant="outline-warning">Archived Notes</Button>
           </Nav.Link>
         </Nav>
       </Container>

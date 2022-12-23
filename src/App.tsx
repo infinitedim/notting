@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { lazy, Suspense, useMemo } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -30,7 +28,7 @@ export default function App(): JSX.Element {
     });
   }, [notes, tags]);
 
-  function onCreateNote({ tags, ...data }: NoteData) {
+  function onCreateNote({ tags, ...data }: NoteData): void {
     setNotes((prevNotes) => {
       return [
         ...prevNotes,
@@ -39,11 +37,11 @@ export default function App(): JSX.Element {
     });
   }
 
-  function addTag(tag: Tag) {
+  function addTag(tag: Tag): void {
     setTags((prev) => [...prev, tag]);
   }
 
-  function onUpdateNote(id: string, { tags, ...data }: NoteData) {
+  function onUpdateNote(id: string, { tags, ...data }: NoteData): void {
     setNotes((prevNotes) => {
       return prevNotes.map((note) => {
         if (note.id === id) {
@@ -55,13 +53,13 @@ export default function App(): JSX.Element {
     });
   }
 
-  function onDeleteNote(id: string) {
+  function onDeleteNote(id: string): void {
     setNotes((prevNotes) => {
       return prevNotes.filter((note) => note.id !== id);
     });
   }
 
-  function updateTag(id: string, label: string) {
+  function updateTag(id: string, label: string): void {
     setTags((prevTags) => {
       return prevTags.map((tag) => {
         if (tag.id === id) {
@@ -73,7 +71,7 @@ export default function App(): JSX.Element {
     });
   }
 
-  function deleteTag(id: string) {
+  function deleteTag(id: string): void {
     setTags((prevTags) => {
       return prevTags.filter((tag) => tag.id !== id);
     });
@@ -127,7 +125,7 @@ export default function App(): JSX.Element {
             />
           </Route>
           <Route
-            path="/archive"
+            path="/archived"
             element={<ArchivedNotes />}
           />
           <Route

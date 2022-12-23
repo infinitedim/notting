@@ -1,25 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormEvent, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Stack from "react-bootstrap/esm/Stack";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreatetableReactSelect from "react-select/creatable";
 import { v4 as uuidV4 } from "uuid";
 import { Tag, NoteFormProps } from "../types/types";
 
 export default function NoteForms({
-  title,
-  markdown,
-  tags,
+  title = "",
+  markdown = "",
+  tags = [],
   onSubmit,
   onAddTag,
   availableTags,
 }: NoteFormProps): JSX.Element {
+  const navigate = useNavigate();
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
 
   function submitHandler(event: FormEvent): void {
     event.preventDefault();
@@ -27,8 +29,10 @@ export default function NoteForms({
     onSubmit({
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
-      tags: [],
+      tags: selectedTags,
     });
+
+    navigate("..");
   }
 
   return (
@@ -41,6 +45,7 @@ export default function NoteForms({
               <Form.Control
                 required
                 ref={titleRef}
+                defaultValue={title}
               />
             </Form.Group>
           </Col>
@@ -85,6 +90,7 @@ export default function NoteForms({
             as="textarea"
             rows={15}
             ref={markdownRef}
+            defaultValue={markdown}
           />
         </Form.Group>
         <Stack

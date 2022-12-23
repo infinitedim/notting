@@ -4,7 +4,7 @@ import { useNote } from "../helpers/helpers";
 import ReactMarkdown from "react-markdown";
 import { NoteProps } from "../types/types";
 
-export function Note({ onDelete }: NoteProps): JSX.Element {
+export default function Note({ onDelete }: NoteProps): JSX.Element {
   const note = useNote();
   const navigate = useNavigate();
 
