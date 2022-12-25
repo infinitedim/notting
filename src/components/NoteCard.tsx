@@ -11,7 +11,7 @@ export default function NoteCard({
     <Card
       as={Link}
       to={`/${id}`}
-      className={"h-100 text-reset text-decoration-none }"}
+      className="h-100 text-reset text-decoration-none"
     >
       <Card.Body>
         <Stack

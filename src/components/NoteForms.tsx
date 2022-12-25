@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FormEvent, useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
@@ -85,7 +84,6 @@ export default function NoteForms({
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
           <Form.Control
-            // defaultValue={markdown}
             required
             as="textarea"
             rows={15}

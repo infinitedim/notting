@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
+    "lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
+    "format": "prettier --config .prettierrc --write \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
+    "format:diff": "prettier --config .prettierrc --list-different \"**/*.{js,jsx,ts,tsx,md,mdx}\""
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",

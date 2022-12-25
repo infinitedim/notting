@@ -16,7 +16,7 @@ export default function NoteList({
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
   const filteredNotes = useMemo(() => {
-    return notes.filter((note) => {
+    return notes?.filter((note) => {
       return (
         (title === "" ||
           note.title.toLowerCase().includes(title.toLowerCase())) &&
