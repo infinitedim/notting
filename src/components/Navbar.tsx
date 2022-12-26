@@ -13,6 +13,7 @@ export default function Navbars(): JSX.Element {
       <Container>
         <Navbar.Brand href="#home">Notting</Navbar.Brand>
         <Nav className="d-flex justify-content-end">
+          {" "}
           <Nav.Link
             as={Link}
             to="/"
