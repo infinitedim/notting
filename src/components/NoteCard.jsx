@@ -1,17 +1,12 @@
 import { Card, Stack, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { SimplifiedNote } from "../types/types";
 
-export default function NoteCard({
-  id,
-  title,
-  tags,
-}: SimplifiedNote): JSX.Element {
+export default function NoteCard({ id, title, tags }) {
   return (
     <Card
       as={Link}
       to={`/${id}`}
-      className={"h-100 text-reset text-decoration-none }"}
+      className="h-100 text-reset text-decoration-none }"
     >
       <Card.Body>
         <Stack

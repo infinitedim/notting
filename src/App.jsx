@@ -2,79 +2,70 @@ import { lazy, Suspense, useMemo } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
-import { NoteData, RawNote, Tag } from "./types/types";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import { NoteLayout } from "./layout/NoteLayout";
+import useLocalStorage from "./hooks/useLocalStorage";
+import NoteLayout from "./layout/NoteLayout";
 
-const ArchivedNotes = lazy(async () => await import("./pages/ArchivedNotes"));
-const EditNote = lazy(async () => await import("./pages/EditNote"));
-const NoteList = lazy(async () => await import("./pages/NoteList"));
-const Loading = lazy(async () => await import("./pages/Loading"));
-const NewNote = lazy(async () => await import("./pages/NewNote"));
-const Note = lazy(async () => await import("./pages/Note"));
-const Navbars = lazy(async () => await import("./components/Navbar"));
+const ArchivedNotes = lazy(() => import("./pages/ArchivedNotes"));
+const EditNote = lazy(() => import("./pages/EditNote"));
+const NoteList = lazy(() => import("./pages/NoteList"));
+const Loading = lazy(() => import("./pages/Loading"));
+const NewNote = lazy(() => import("./pages/NewNote"));
+const Note = lazy(() => import("./pages/Note"));
+const Navbars = lazy(() => import("./components/Navbar"));
 
-export default function App(): JSX.Element {
+export default function App() {
   const location = useLocation();
-  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
-  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+  const [notes, setNotes] = useLocalStorage("NOTES", []);
+  const [tags, setTags] = useLocalStorage("TAGS", []);
 
-  const notesWithTags = useMemo(() => {
-    return notes?.map((note) => {
-      return {
+  const notesWithTags = useMemo(
+    () =>
+      notes?.map((note) => ({
         ...note,
         tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
-      };
-    });
-  }, [notes, tags]);
+      })),
+    [notes, tags],
+  );
 
-  function onCreateNote({ tags, ...data }: NoteData): void {
-    setNotes((prevNotes) => {
-      return [
-        ...prevNotes,
-        { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
-      ];
-    });
+  function onCreateNote({ tags, ...data }) {
+    setNotes((prevNotes) => [
+      ...prevNotes,
+      { ...data, id: uuidV4(), tagIds: tags.map((tag) => tag.id) },
+    ]);
   }
 
-  function addTag(tag: Tag): void {
+  function addTag(tag) {
     setTags((prev) => [...prev, tag]);
   }
 
-  function onUpdateNote(id: string, { tags, ...data }: NoteData): void {
-    setNotes((prevNotes) => {
-      return prevNotes.map((note) => {
+  function onUpdateNote(id, { tags, ...data }) {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => {
         if (note.id === id) {
           return { ...note, ...data, tagIds: tags.map((tag) => tag.id) };
-        } else {
-          return note;
         }
-      });
-    });
+        return note;
+      }),
+    );
   }
 
-  function onDeleteNote(id: string): void {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note) => note.id !== id);
-    });
+  function onDeleteNote(id) {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   }
 
-  function updateTag(id: string, label: string): void {
-    setTags((prevTags) => {
-      return prevTags.map((tag) => {
+  function updateTag(id, label) {
+    setTags((prevTags) =>
+      prevTags.map((tag) => {
         if (tag.id === id) {
           return { ...tag, label };
-        } else {
-          return tag;
         }
-      });
-    });
+        return tag;
+      }),
+    );
   }
 
-  function deleteTag(id: string): void {
-    setTags((prevTags) => {
-      return prevTags.filter((tag) => tag.id !== id);
-    });
+  function deleteTag(id) {
+    setTags((prevTags) => prevTags.filter((tag) => tag.id !== id));
   }
 
   return (

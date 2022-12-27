@@ -1,11 +1,6 @@
 import NoteForms from "../components/NoteForms";
-import { NewNoteProps } from "../types/types";
 
-export default function NewNote({
-  onSubmit,
-  availableTags,
-  onAddTag,
-}: NewNoteProps): JSX.Element {
+export default function NewNote({ onSubmit, availableTags, onAddTag }) {
   return (
     <>
       <h1>New Note</h1>

@@ -1,12 +1,7 @@
-import { EditNoteProps } from "../types/types";
 import NoteForms from "../components/NoteForms";
-import { useNote } from "../helpers/helpers";
+import useNote from "../helpers/helpers";
 
-export default function EditNote({
-  onSubmit,
-  onAddTag,
-  availableTags,
-}: EditNoteProps): JSX.Element {
+export default function EditNote({ onSubmit, onAddTag, availableTags }) {
   const note = useNote();
   return (
     <>

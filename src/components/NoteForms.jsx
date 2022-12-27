@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { FormEvent, useRef, useState } from "react";
+/* eslint-disable no-shadow */
+import { useRef, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
@@ -8,7 +7,6 @@ import Stack from "react-bootstrap/esm/Stack";
 import { Link, useNavigate } from "react-router-dom";
 import CreatetableReactSelect from "react-select/creatable";
 import { v4 as uuidV4 } from "uuid";
-import { Tag, NoteFormProps } from "../types/types";
 
 export default function NoteForms({
   title = "",
@@ -17,18 +15,18 @@ export default function NoteForms({
   onSubmit,
   onAddTag,
   availableTags,
-}: NoteFormProps): JSX.Element {
+}) {
   const navigate = useNavigate();
-  const titleRef = useRef<HTMLInputElement>(null);
-  const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
+  const titleRef = useRef(null);
+  const markdownRef = useRef(null);
+  const [selectedTags, setSelectedTags] = useState(tags);
 
-  function submitHandler(event: FormEvent): void {
+  function submitHandler(event) {
     event.preventDefault();
 
     onSubmit({
-      title: titleRef.current!.value,
-      markdown: markdownRef.current!.value,
+      title: titleRef.current.value,
+      markdown: markdownRef.current.value,
       tags: selectedTags,
     });
 
@@ -36,7 +34,7 @@ export default function NoteForms({
   }
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={(e) => submitHandler(e)}>
       <Stack gap={4}>
         <Row>
           <Col>
@@ -61,20 +59,20 @@ export default function NoteForms({
                     newTags,
                   ]);
                 }}
-                value={selectedTags?.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
-                options={availableTags?.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
+                value={selectedTags?.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id,
+                }))}
+                options={availableTags?.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id,
+                }))}
                 onChange={(tags) =>
                   setSelectedTags(
-                    tags.map((tag) => {
-                      return {
-                        label: tag.label,
-                        id: tag.value,
-                      };
-                    }),
+                    tags.map((tag) => ({
+                      label: tag.label,
+                      id: tag.value,
+                    })),
                   )
                 }
                 isMulti
@@ -85,7 +83,6 @@ export default function NoteForms({
         <Form.Group controlId="markdown">
           <Form.Label>Body</Form.Label>
           <Form.Control
-            // defaultValue={markdown}
             required
             as="textarea"
             rows={15}

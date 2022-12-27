@@ -3,30 +3,30 @@ import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import ReactSelect from "react-select";
 import EditTagsModal from "../components/EditTagsModal";
 import NoteCard from "../components/NoteCard";
-import { NoteListProps, Tag } from "../types/types";
 
 export default function NoteList({
   availableTags,
   notes,
   onUpdateTag,
   onDeleteTag,
-}: NoteListProps): JSX.Element {
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+}) {
+  const [selectedTags, setSelectedTags] = useState([]);
   const [title, setTitle] = useState("");
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
-  const filteredNotes = useMemo(() => {
-    return notes.filter((note) => {
-      return (
-        (title === "" ||
-          note.title.toLowerCase().includes(title.toLowerCase())) &&
-        (selectedTags.length === 0 ||
-          selectedTags.every((tag) =>
-            note.tags.some((noteTag) => noteTag.id === tag.id),
-          ))
-      );
-    });
-  }, [title, selectedTags, notes]);
+  const filteredNotes = useMemo(
+    () =>
+      notes.filter(
+        (note) =>
+          (title === "" ||
+            note.title.toLowerCase().includes(title.toLowerCase())) &&
+          (selectedTags.length === 0 ||
+            selectedTags.every((tag) =>
+              note.tags.some((noteTag) => noteTag.id === tag.id),
+            )),
+      ),
+    [title, selectedTags, notes],
+  );
 
   return (
     <>
@@ -64,17 +64,17 @@ export default function NoteList({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
-                value={selectedTags.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
-                options={availableTags.map((tag) => {
-                  return { label: tag.label, value: tag.id };
-                })}
+                value={selectedTags.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id,
+                }))}
+                options={availableTags.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id,
+                }))}
                 onChange={(tags) => {
                   setSelectedTags(
-                    tags.map((tag) => {
-                      return { label: tag.label, id: tag.value };
-                    }),
+                    tags.map((tag) => ({ label: tag.label, id: tag.value })),
                   );
                 }}
                 isMulti

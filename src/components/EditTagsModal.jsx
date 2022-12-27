@@ -1,5 +1,4 @@
 import { Modal, Stack, Row, Col, Button, Form } from "react-bootstrap";
-import { EditTagsModalProps } from "../types/types";
 
 export default function EditTagsModal({
   availableTags,
@@ -7,7 +6,7 @@ export default function EditTagsModal({
   show,
   onDeleteTag,
   onUpdateTag,
-}: EditTagsModalProps): JSX.Element {
+}) {
   return (
     <Modal
       show={show}
