@@ -2,17 +2,17 @@ import { lazy, Suspense, useMemo } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
-import { NoteData, RawNote, Tag } from "./types/types";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import { NoteLayout } from "./layout/NoteLayout";
+import { NoteData, RawNote, Tag } from "@/types/types";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { NoteLayout } from "@/layout/NoteLayout";
 
-const ArchivedNotes = lazy(async () => await import("./pages/ArchivedNotes"));
-const EditNote = lazy(async () => await import("./pages/EditNote"));
-const NoteList = lazy(async () => await import("./pages/NoteList"));
-const Loading = lazy(async () => await import("./pages/Loading"));
-const NewNote = lazy(async () => await import("./pages/NewNote"));
-const Note = lazy(async () => await import("./pages/Note"));
-const Navbars = lazy(async () => await import("./components/Navbar"));
+const ArchivedNotes = lazy(async () => await import("@/pages/ArchivedNotes"));
+const EditNote = lazy(async () => await import("@/pages/EditNote"));
+const NoteList = lazy(async () => await import("@/pages/NoteList"));
+const Loading = lazy(async () => await import("@/pages/Loading"));
+const NewNote = lazy(async () => await import("@/pages/NewNote"));
+const Note = lazy(async () => await import("@/pages/Note"));
+const Navbars = lazy(async () => await import("@/components/Navbar"));
 
 export default function App(): JSX.Element {
   const location = useLocation();
