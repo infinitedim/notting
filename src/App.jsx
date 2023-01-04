@@ -5,6 +5,7 @@ import { v4 as uuidV4 } from "uuid";
 import useLocalStorage from "./hooks/useLocalStorage";
 import NoteLayout from "./layout/NoteLayout";
 
+// const Login = lazy(() => import("./pages/LoginNote"));
 const ArchivedNotes = lazy(() => import("./pages/ArchivedNotes"));
 const EditNote = lazy(() => import("./pages/EditNote"));
 const NoteList = lazy(() => import("./pages/NoteList"));
