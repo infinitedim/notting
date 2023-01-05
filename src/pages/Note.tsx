@@ -1,8 +1,8 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { useNote } from "../helpers/helpers";
+import { useNote } from "@/helpers";
 import ReactMarkdown from "react-markdown";
-import { NoteProps } from "../types/types";
+import { NoteProps } from "@/types";
 
 export default function Note({ onDelete }: NoteProps): JSX.Element {
   const note = useNote();

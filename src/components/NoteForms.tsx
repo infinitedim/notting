@@ -7,7 +7,7 @@ import Stack from "react-bootstrap/esm/Stack";
 import { Link, useNavigate } from "react-router-dom";
 import CreatetableReactSelect from "react-select/creatable";
 import { v4 as uuidV4 } from "uuid";
-import { Tag, NoteFormProps } from "../types/types";
+import { Tag, NoteFormProps } from "@/types";
 
 export default function NoteForms({
   title = "",

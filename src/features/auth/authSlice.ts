@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LocalStorage } from "../../utils";
+import { LocalStorage } from "@/utils";
 
 type AuthSliceTypes = {
-  token: string
-  isAuthenticated: boolean
+  token: string;
+  isAuthenticated: boolean;
   user: {
-    name: string
-    email: string
-  }
+    name: string;
+    email: string;
+  };
 };
 
 const initialState: AuthSliceTypes = {
@@ -15,8 +15,8 @@ const initialState: AuthSliceTypes = {
   isAuthenticated: false,
   user: LocalStorage.get<AuthSliceTypes["user"]>("user") ?? {
     name: "",
-    email: ""
-  }
+    email: "",
+  },
 };
 
 const AuthSlice = createSlice({
@@ -25,11 +25,11 @@ const AuthSlice = createSlice({
   reducers: {
     setCredentials: (state, { payload }: PayloadAction<string>) => ({
       ...state,
-      token: payload
+      token: payload,
     }),
     setUser: (state, { payload }: PayloadAction<AuthSliceTypes["user"]>) => ({
       ...state,
-      user: payload
+      user: payload,
     }),
     logout: (state, action: PayloadAction) => ({
       ...state,
@@ -37,16 +37,12 @@ const AuthSlice = createSlice({
       isAuthenticated: false,
       user: {
         name: "",
-        email: ""
-      }
-    })
-  }
+        email: "",
+      },
+    }),
+  },
 });
 
-export const {
-  logout,
-  setCredentials,
-  setUser
-} = AuthSlice.actions;
+export const { logout, setCredentials, setUser } = AuthSlice.actions;
 
 export default AuthSlice.reducer;

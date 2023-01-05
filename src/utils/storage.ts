@@ -8,7 +8,7 @@ export const LocalStorage = {
 
     return null;
   },
-  set: (key: string, value: any) => {
+  set: (key: string, value) => {
     localStorage.setItem(key, JSON.stringify(value));
   },
   remove: (key: string) => {
@@ -16,5 +16,5 @@ export const LocalStorage = {
   },
   clear: () => {
     localStorage.clear();
-  }
+  },
 };

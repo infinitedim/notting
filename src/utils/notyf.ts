@@ -4,7 +4,7 @@ export const toast = new Notyf({
   duration: 4000,
   position: {
     x: "center",
-    y: "top"
+    y: "top",
   },
-  dismissible: true
+  dismissible: true,
 });

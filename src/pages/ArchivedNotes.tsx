@@ -1,4 +1,4 @@
-import NoteCard from "../components/NoteCard";
+import NoteCard from "@/components/NoteCard";
 
 export default function ArchivedNotes(): JSX.Element {
   return (

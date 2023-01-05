@@ -1,6 +1,6 @@
-import { EditNoteProps } from "../types/types";
-import NoteForms from "../components/NoteForms";
-import { useNote } from "../helpers/helpers";
+import { EditNoteProps } from "@/types";
+import NoteForms from "@/components/NoteForms";
+import { useNote } from "@/helpers";
 
 export default function EditNote({
   onSubmit,

@@ -2,9 +2,10 @@ import { lazy, Suspense, useMemo } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { v4 as uuidV4 } from "uuid";
-import { NoteData, RawNote, Tag } from "@/types/types";
+import { NoteData, RawNote, Tag } from "@/types";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { NoteLayout } from "@/layout/NoteLayout";
+import { useAppSelector } from "@/app/index";
 
 const ArchivedNotes = lazy(async () => await import("@/pages/ArchivedNotes"));
 const EditNote = lazy(async () => await import("@/pages/EditNote"));
@@ -13,11 +14,13 @@ const Loading = lazy(async () => await import("@/pages/Loading"));
 const NewNote = lazy(async () => await import("@/pages/NewNote"));
 const Note = lazy(async () => await import("@/pages/Note"));
 const Navbars = lazy(async () => await import("@/components/Navbar"));
+const Login = lazy(async () => await import("@/pages/Login"));
 
 export default function App(): JSX.Element {
   const location = useLocation();
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+  const { token } = useAppSelector(({ auth }) => auth);
 
   const notesWithTags = useMemo(() => {
     return notes?.map((note) => {

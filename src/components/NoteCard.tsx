@@ -1,6 +1,6 @@
 import { Card, Stack, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { SimplifiedNote } from "../types/types";
+import { SimplifiedNote } from "@/types";
 
 export default function NoteCard({
   id,

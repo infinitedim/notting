@@ -1,5 +1,5 @@
-import NoteForms from "../components/NoteForms";
-import { NewNoteProps } from "../types/types";
+import NoteForms from "@/components/NoteForms";
+import { NewNoteProps } from "@/types";
 
 export default function NewNote({
   onSubmit,

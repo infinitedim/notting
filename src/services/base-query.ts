@@ -1,4 +1,9 @@
-import { FetchBaseQueryError, fetchBaseQuery, BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/query/react";
+import {
+  FetchBaseQueryError,
+  fetchBaseQuery,
+  BaseQueryFn,
+  FetchArgs,
+} from "@reduxjs/toolkit/query/react";
 import { RootState } from "@/app/index";
 import { logout } from "@/features/auth";
 
@@ -11,10 +16,11 @@ const baseQuery = fetchBaseQuery({
 
     const { token } = (getState() as RootState).auth;
 
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
-  }
+  },
 });
 
 const baseQueryWithLogout: BaseQueryFn<
@@ -24,7 +30,7 @@ const baseQueryWithLogout: BaseQueryFn<
 > = async (args, api, options) => {
   const result = await baseQuery(args, api, options);
 
-  if (result.error) {
+  if (result.error != null) {
     console.error(result.error);
   }
 
