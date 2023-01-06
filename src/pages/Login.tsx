@@ -1,8 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "@/app/index";
 import { setCredentials } from "@/features/auth";
-import { useLoginMutation, UserLoginRequestBodyTypes } from "@/services/auth";
+import { useLoginMutation } from "@/services/auth";
 import { toast } from "@/utils";
+import { UserLoginRequestBodyTypes } from "@/types";
+import { Form, Button } from "react-bootstrap";
 
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState<UserLoginRequestBodyTypes>({
@@ -40,22 +42,39 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <div className="container p-4">
-      <form onSubmit={handleOnSubmit}>
-        <input
+    <Form onSubmit={handleOnSubmit}>
+      <Form.Group
+        className="mb-3"
+        controlId="formBasicEmail"
+      >
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
           type="email"
-          name="email"
-          id=""
+          placeholder="Enter email"
           onChange={handleOnChange}
         />
-        <input
+        <Form.Text className="text-muted">
+          Well never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group
+        className="mb-3"
+        controlId="formBasicPassword"
+      >
+        <Form.Label>Password</Form.Label>
+        <Form.Control
           type="password"
-          name="password"
-          id=""
+          placeholder="Password"
           onChange={handleOnChange}
         />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      </Form.Group>
+      <Button
+        variant="primary"
+        type="submit"
+      >
+        Submit
+      </Button>
+    </Form>
   );
 }

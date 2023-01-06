@@ -1,23 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { HttpResponse } from "@/types";
+import {
+  HttpResponse,
+  UserLoginRequestBodyTypes,
+  UserLoginResponseTypes,
+  UserRegisterRequestBodyTypes,
+} from "@/types";
 
 import baseQuery from "./base-query";
-
-export type UserRegisterRequestBodyTypes = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-export type UserLoginRequestBodyTypes = Pick<
-  UserRegisterRequestBodyTypes,
-  "email" | "password"
->;
-
-export type UserLoginResponseTypes = {
-  accessToken: string;
-  refreshToken: string;
-};
 
 const authServices = createApi({
   baseQuery,

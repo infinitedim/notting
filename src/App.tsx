@@ -5,7 +5,7 @@ import { v4 as uuidV4 } from "uuid";
 import { NoteData, RawNote, Tag } from "@/types";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { NoteLayout } from "@/layout/NoteLayout";
-import { useAppSelector } from "@/app/index";
+import { ProtectedRoute } from "./routes/PrivateRoutes";
 
 const ArchivedNotes = lazy(async () => await import("@/pages/ArchivedNotes"));
 const EditNote = lazy(async () => await import("@/pages/EditNote"));
@@ -20,7 +20,6 @@ export default function App(): JSX.Element {
   const location = useLocation();
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
-  const { token } = useAppSelector(({ auth }) => auth);
 
   const notesWithTags = useMemo(() => {
     return notes?.map((note) => {
@@ -89,47 +88,56 @@ export default function App(): JSX.Element {
         <Routes>
           <Route
             path="/"
-            element={
-              <NoteList
-                notes={notesWithTags}
-                availableTags={tags}
-                onUpdateTag={updateTag}
-                onDeleteTag={deleteTag}
-              />
-            }
-          />
-          <Route
-            path="/new"
-            element={
-              <NewNote
-                onSubmit={onCreateNote}
-                onAddTag={addTag}
-                availableTags={tags}
-              />
-            }
-          />
-          <Route
-            path="/:id"
-            element={<NoteLayout notes={notesWithTags} />}
+            element={<ProtectedRoute />}
           >
             <Route
-              index
-              element={<Note onDelete={onDeleteNote} />}
+              path="/"
+              element={
+                <NoteList
+                  notes={notesWithTags}
+                  availableTags={tags}
+                  onUpdateTag={updateTag}
+                  onDeleteTag={deleteTag}
+                />
+              }
             />
             <Route
-              path="edit"
+              path="/new"
               element={
-                <EditNote
-                  onSubmit={onUpdateNote}
+                <NewNote
+                  onSubmit={onCreateNote}
                   onAddTag={addTag}
                   availableTags={tags}
                 />
               }
             />
+            <Route
+              path="/:id"
+              element={<NoteLayout notes={notesWithTags} />}
+            >
+              <Route
+                index
+                element={<Note onDelete={onDeleteNote} />}
+              />
+              <Route
+                path="edit"
+                element={
+                  <EditNote
+                    onSubmit={onUpdateNote}
+                    onAddTag={addTag}
+                    availableTags={tags}
+                  />
+                }
+              />
+            </Route>
+            <Route
+              path="/archived"
+              element={<ArchivedNotes />}
+            />
           </Route>
           <Route
-            path="/archived"
-            element={<ArchivedNotes />}
+            path="/login"
+            element={<Login />}
           />
           <Route
             path="*"

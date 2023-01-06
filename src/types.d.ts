@@ -6,6 +6,22 @@ export interface HttpResponse<T> {
   data?: T;
 }
 
+export type UserRegisterRequestBodyTypes = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type UserLoginRequestBodyTypes = Pick<
+  UserRegisterRequestBodyTypes,
+  "email" | "password"
+>;
+
+export type UserLoginResponseTypes = {
+  accessToken: string;
+  refreshToken: string;
+};
+
 export type Note = {
   id: string;
 } & NoteData;
