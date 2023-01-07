@@ -15,6 +15,7 @@ const NewNote = lazy(async () => await import("@/pages/NewNote"));
 const Note = lazy(async () => await import("@/pages/Note"));
 const Navbars = lazy(async () => await import("@/components/Navbar"));
 const Login = lazy(async () => await import("@/pages/Login"));
+const Register = lazy(async () => await import("@/pages/Register"));
 
 export default function App(): JSX.Element {
   const location = useLocation();
@@ -138,6 +139,10 @@ export default function App(): JSX.Element {
           <Route
             path="/login"
             element={<Login />}
+          />
+          <Route
+            path="/register"
+            element={<Register />}
           />
           <Route
             path="*"

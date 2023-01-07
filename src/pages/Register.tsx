@@ -1,19 +1,19 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "@/app/index";
-import { setCredentials } from "@/features/auth";
-import { useLoginMutation } from "@/services/auth";
+import { setCredentials, setUser } from "@/features/auth";
+import { useRegisterMutation } from "@/services/auth";
 import { toast } from "@/utils";
-import { UserLoginRequestBodyTypes } from "@/types";
-import { Form, Button, Stack } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { UserRegisterRequestBodyTypes } from "@/types";
+import { Form, Button } from "react-bootstrap";
 
-export default function Login(): JSX.Element {
-  const [formData, setFormData] = useState<UserLoginRequestBodyTypes>({
+export default function Register(): JSX.Element {
+  const [formData, setFormData] = useState<UserRegisterRequestBodyTypes>({
+    name: "",
     email: "",
     password: "",
   });
 
-  const [login] = useLoginMutation();
+  const [register] = useRegisterMutation();
   const dispatch = useAppDispatch();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -28,11 +28,12 @@ export default function Login(): JSX.Element {
   const handleOnSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    login(formData)
+    register(formData)
       .unwrap()
       .then((res) => {
         if (res.statusCode === 200) {
           toast.success(res.message);
+          console.log(res.data);
           dispatch(setCredentials(res.data?.accessToken ?? ""));
         }
       })
@@ -44,6 +45,17 @@ export default function Login(): JSX.Element {
 
   return (
     <Form onSubmit={handleOnSubmit}>
+      <Form.Group
+        className="mb-3"
+        controlId="formBasicFullName"
+      >
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Fullname"
+          onChange={handleOnChange}
+        />
+      </Form.Group>
       <Form.Group
         className="mb-3"
         controlId="formBasicEmail"
@@ -70,20 +82,12 @@ export default function Login(): JSX.Element {
           onChange={handleOnChange}
         />
       </Form.Group>
-      <Stack>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-          Submit
-        </Button>
-        <Button
-          variant="danger"
-          type="button"
-        >
-          <Link to="/register">Register</Link>
-        </Button>
-      </Stack>
+      <Button
+        variant="primary"
+        type="submit"
+      >
+        Submit
+      </Button>
     </Form>
   );
 }
