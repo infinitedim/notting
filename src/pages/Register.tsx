@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "@/app/index";
-import { setCredentials, setUser } from "@/features/auth";
+import { setUser } from "@/features/auth";
 import { useRegisterMutation } from "@/services/auth";
 import { toast } from "@/utils";
 import { UserRegisterRequestBodyTypes } from "@/types";
@@ -34,7 +34,7 @@ export default function Register(): JSX.Element {
         if (res.statusCode === 200) {
           toast.success(res.message);
           console.log(res.data);
-          dispatch(setCredentials(res.data?.accessToken ?? ""));
+          dispatch(setUser(res.data as { name: string; email: string }));
         }
       })
       .catch((error) => {
