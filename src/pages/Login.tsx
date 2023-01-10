@@ -6,6 +6,7 @@ import { useLoginMutation } from "@/services/auth";
 import { toast } from "@/utils";
 import { UserLoginRequestBodyTypes } from "@/types";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState<UserLoginRequestBodyTypes>({
@@ -45,22 +46,45 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <div className="container p-4">
-      <form onSubmit={handleOnSubmit}>
+    <form onSubmit={handleOnSubmit}>
+      <div className="mb-3">
+        <label
+          htmlFor="email"
+          className="form-label"
+        >
+          Email address
+        </label>
         <input
-          type="email"
           name="email"
-          id=""
+          type="email"
+          className="form-control"
+          id="email"
+          placeholder="name@example.com"
           onChange={handleOnChange}
         />
+      </div>
+      <div className="mb-3">
+        <label
+          htmlFor="password"
+          className="form-label"
+        >
+          Password
+        </label>
         <input
           type="password"
+          className="form-control"
+          id="password"
           name="password"
-          id=""
+          placeholder="Password"
           onChange={handleOnChange}
         />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      </div>
+      <Button
+        type="submit"
+        variant="primary"
+      >
+        Login sinih
+      </Button>
+    </form>
   );
 }
