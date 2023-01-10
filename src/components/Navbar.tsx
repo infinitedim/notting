@@ -28,12 +28,6 @@ export default function Navbars(): JSX.Element {
               Logout
             </Button>
           </Nav.Link>
-          <Nav.Link
-            as={Link}
-            to="/archived"
-          >
-            <Button variant="outline-warning">Archived Notes</Button>
-          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
