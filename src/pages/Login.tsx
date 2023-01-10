@@ -1,22 +1,23 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "@/app/index";
 import { setCredentials } from "@/features/auth";
 import { useLoginMutation } from "@/services/auth";
 import { toast } from "@/utils";
 import { UserLoginRequestBodyTypes } from "@/types";
-import { Form, Button, Stack } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(): JSX.Element {
   const [formData, setFormData] = useState<UserLoginRequestBodyTypes>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
 
     setFormData((state) => ({
@@ -25,7 +26,7 @@ export default function Login(): JSX.Element {
     }));
   };
 
-  const handleOnSubmit = (event: FormEvent<HTMLFormElement>): void => {
+  const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     login(formData)
@@ -34,6 +35,7 @@ export default function Login(): JSX.Element {
         if (res.statusCode === 200) {
           toast.success(res.message);
           dispatch(setCredentials(res.data?.accessToken ?? ""));
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -43,47 +45,22 @@ export default function Login(): JSX.Element {
   };
 
   return (
-    <Form onSubmit={handleOnSubmit}>
-      <Form.Group
-        className="mb-3"
-        controlId="formBasicEmail"
-      >
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
+    <div className="container p-4">
+      <form onSubmit={handleOnSubmit}>
+        <input
           type="email"
-          placeholder="Enter email"
+          name="email"
+          id=""
           onChange={handleOnChange}
         />
-        <Form.Text className="text-muted">
-          Well never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group
-        className="mb-3"
-        controlId="formBasicPassword"
-      >
-        <Form.Label>Password</Form.Label>
-        <Form.Control
+        <input
           type="password"
-          placeholder="Password"
+          name="password"
+          id=""
           onChange={handleOnChange}
         />
-      </Form.Group>
-      <Stack>
-        <Button
-          variant="primary"
-          type="submit"
-        >
-          Submit
-        </Button>
-        <Button
-          variant="danger"
-          type="button"
-        >
-          <Link to="/register">Register</Link>
-        </Button>
-      </Stack>
-    </Form>
+        <button type="submit">Login</button>
+      </form>
+    </div>
   );
 }

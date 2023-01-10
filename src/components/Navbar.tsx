@@ -1,3 +1,5 @@
+import { logout } from "@/features/auth";
+import { useAppDispatch } from "@/app/index";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -5,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 export default function Navbars(): JSX.Element {
+  const dispatch = useAppDispatch();
   return (
     <Navbar
       bg="transparent"
@@ -18,7 +21,12 @@ export default function Navbars(): JSX.Element {
             as={Link}
             to="/"
           >
-            <Button variant="outline-danger">Logout</Button>
+            <Button
+              variant="outline-danger"
+              onClick={() => dispatch(logout())}
+            >
+              Logout
+            </Button>
           </Nav.Link>
           <Nav.Link
             as={Link}

@@ -7,7 +7,7 @@ import {
 import { RootState } from "@/app/index";
 import { logout } from "@/features/auth";
 
-const baseUrl = "http://localhost:88/api/v1";
+const baseUrl = "http://localhost:5000/api/v1";
 
 const baseQuery = fetchBaseQuery({
   baseUrl,
